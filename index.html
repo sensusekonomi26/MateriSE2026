@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portal Materi SE2026 – Sensus Ekonomi 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== OVERLAY MOBILE ===== -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <span class="logo-icon">📊</span>
+      <div>
+        <div class="logo-title">SE<span>2026</span></div>
+        <div class="logo-sub">Sensus Ekonomi</div>
+      </div>
+    </div>
+    <button class="sidebar-close" id="sidebarClose">✕</button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-label">MENU UTAMA</div>
+    <a href="#" class="nav-item active" data-view="beranda">
+      <span class="nav-icon">🏠</span> Beranda
+    </a>
+    <a href="#" class="nav-item" data-view="materi">
+      <span class="nav-icon">📚</span> Semua Materi
+    </a>
+    <a href="#" class="nav-item" data-view="favorit">
+      <span class="nav-icon">⭐</span> Favorit Saya
+    </a>
+
+    <div class="nav-label" style="margin-top:24px;">KATEGORI</div>
+    <div id="sidebarKategori">
+      <a href="#" class="nav-item kategori-item" data-kat="semua">
+        <span class="nav-icon">🗂️</span> Semua Kategori
+      </a>
+    </div>
+
+    <div class="nav-label" style="margin-top:24px;">TIPE MATERI</div>
+    <a href="#" class="nav-item filter-type" data-type="semua">
+      <span class="nav-icon">📂</span> Semua
+    </a>
+    <a href="#" class="nav-item filter-type" data-type="pdf">
+      <span class="nav-icon">📄</span> Dokumen PDF
+    </a>
+    <a href="#" class="nav-item filter-type" data-type="video">
+      <span class="nav-icon">🎬</span> Video
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="footer-badge">BPS – Badan Pusat Statistik</div>
+    <div class="footer-ver">v1.0.0 · 2026</div>
+  </div>
+</aside>
+
+<!-- ===== MAIN WRAPPER ===== -->
+<div class="main-wrapper" id="mainWrapper">
+
+  <!-- TOP NAV -->
+  <header class="topnav">
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topnav-title">Portal Materi <strong>SE2026</strong></div>
+    <div class="topnav-right">
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="Cari materi…" />
+        <button class="search-clear" id="searchClear">✕</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content" id="mainContent">
+
+    <!-- HERO -->
+    <section class="hero" id="viewBeranda">
+      <div class="hero-bg"></div>
+      <div class="hero-inner">
+        <div class="hero-badge">🗓️ Sensus Ekonomi 2026</div>
+        <h1 class="hero-title">Portal Materi<br /><span>Pelatihan SE2026</span></h1>
+        <p class="hero-desc">Akses seluruh materi pelatihan, panduan teknis, dan video pembelajaran Sensus Ekonomi 2026 dalam satu platform terintegrasi.</p>
+        <div class="hero-stats" id="heroStats">
+          <div class="stat-card"><span id="statTotal">—</span><small>Total Materi</small></div>
+          <div class="stat-card"><span id="statPdf">—</span><small>Dokumen PDF</small></div>
+          <div class="stat-card"><span id="statVideo">—</span><small>Video</small></div>
+          <div class="stat-card"><span id="statKat">—</span><small>Kategori</small></div>
+        </div>
+        <button class="btn-hero" id="btnMulai">Jelajahi Materi →</button>
+      </div>
+      <div class="hero-deco">
+        <div class="deco-circle c1"></div>
+        <div class="deco-circle c2"></div>
+        <div class="deco-circle c3"></div>
+      </div>
+    </section>
+
+    <!-- MATERI VIEW -->
+    <section class="view-materi" id="viewMateri" style="display:none;">
+      <div class="filter-bar">
+        <div class="filter-left">
+          <h2 class="section-title">📚 Semua Materi</h2>
+          <span class="result-count" id="resultCount">Memuat…</span>
+        </div>
+        <div class="filter-controls">
+          <select id="filterKategori" class="select-control">
+            <option value="semua">🗂️ Semua Kategori</option>
+          </select>
+          <select id="filterType" class="select-control">
+            <option value="semua">📂 Semua Tipe</option>
+            <option value="pdf">📄 PDF</option>
+            <option value="video">🎬 Video</option>
+          </select>
+          <select id="filterSort" class="select-control">
+            <option value="terbaru">🕐 Terbaru</option>
+            <option value="az">🔤 A–Z</option>
+            <option value="favorit">⭐ Terfavorit</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- GRID MATERI -->
+      <div class="materi-grid" id="materiGrid">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Memuat materi dari database…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAVORIT VIEW -->
+    <section class="view-favorit" id="viewFavorit" style="display:none;">
+      <div class="filter-bar">
+        <div class="filter-left">
+          <h2 class="section-title">⭐ Favorit Saya</h2>
+          <span class="result-count" id="favCount">0 materi</span>
+        </div>
+      </div>
+      <div class="materi-grid" id="favGrid"></div>
+    </section>
+
+  </main>
+
+  <footer class="main-footer">
+    <div>© 2026 Badan Pusat Statistik – Portal Materi Sensus Ekonomi 2026</div>
+    <div class="footer-links">
+      <a href="https://www.bps.go.id" target="_blank">bps.go.id</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== MODAL DETAIL ===== -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modalBox">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-content" id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
